@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import * as Survey from 'survey-react';
-import 'survey-react/survey.css';
+//Hannah's Note: Moved the survey into its own component to make it easier to read
+import SurveyForm from './SurveyForm';
+//import * as Survey from 'survey-react';
+//import 'survey-react/survey.css';
 
 function MapContainer({ lat, lon }) {
   const mapRef = useRef(null);
@@ -44,36 +46,7 @@ function MapContainer({ lat, lon }) {
   return (
     <div className="map-container">
       <div id="map" className="map" style={{ height: '400px' }} />
-
-      {showSurvey && (
-        <div className="survey-container">
-          <h2>Survey Form</h2>
-          <Survey.Survey
-            json={{
-              title: 'Feedback Survey',
-              pages: [
-                {
-                  name: 'page1',
-                  elements: [
-                    {
-                      type: 'radiogroup',
-                      name: 'rating',
-                      title: 'Rate your experience:',
-                      choices: ['Excellent', 'Good', 'Average', 'Poor'],
-                      isRequired: true,
-                    },
-                    {
-                      type: 'comment',
-                      name: 'comments',
-                      title: 'Additional Comments:',
-                    },
-                  ],
-                },
-              ],
-            }}
-          />
-        </div>
-      )}
+      {showSurvey && <SurveyForm />}
     </div>
   );
 }
