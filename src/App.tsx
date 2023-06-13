@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import MapContainer from './MapContainer';
 
-function App() {
-  const [selectedAddress, setSelectedAddress] = useState(null);
+interface Address {
+  id: number;
+  name: string;
+  lat: number;
+  lon: number;
+}
 
-  const addresses = [
+function App() {
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+
+  const addresses: Address[] = [
     { id: 1, name: 'Address 1', lat: 51.5074, lon: -0.1278 },
     { id: 2, name: 'Address 2', lat: 40.7128, lon: -74.0060 },
     { id: 3, name: 'Address 3', lat: 34.0522, lon: -118.2437 },
     // Add more addresses as needed
   ];
 
-  const handleAddressClick = (address) => {
+  const handleAddressClick = (address: Address) => {
     setSelectedAddress(address);
   };
 

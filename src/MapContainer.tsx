@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-//Hannah's Note: Moved the survey into its own component to make it easier to read
 import SurveyForm from './SurveyForm';
-//import * as Survey from 'survey-react';
-//import 'survey-react/survey.css';
 
-function MapContainer({ lat, lon }) {
-  const mapRef = useRef(null);
+interface MapContainerProps {
+  lat: number;
+  lon: number;
+}
+
+function MapContainer({ lat, lon }: MapContainerProps) {
+  const mapRef = useRef<L.Map | null>(null);
   const [showSurvey, setShowSurvey] = useState(false);
 
   useEffect(() => {
@@ -27,7 +29,8 @@ function MapContainer({ lat, lon }) {
       iconUrl: process.env.PUBLIC_URL + '/map-marker-icon-600x-map-marker-11562939743ayfahlvygl-removebg-preview.png', // Replace with the URL of your marker image
       iconSize: [32, 32],
       iconAnchor: [16, 32],
-    });
+    }) as L.Icon;
+    
 
     // Create a marker with the custom icon and add it to the map
     const marker = L.marker([lat, lon], { icon: markerIcon }).addTo(mapRef.current);
@@ -39,7 +42,9 @@ function MapContainer({ lat, lon }) {
 
     // Clean up on component unmount
     return () => {
-      mapRef.current.remove();
+      if (mapRef.current) {
+        mapRef.current.remove();
+      }
     };
   }, [lat, lon]);
 
