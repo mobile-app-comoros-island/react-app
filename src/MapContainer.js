@@ -58,6 +58,8 @@ function MapContainer({ lat, lon }) {
 
   // Callback function when survey is completed
   const onCompleteSurvey = (survey) => {
+    // print the survey results to the console
+    console.log(survey.data);
     // Send survey data to backend for persistence
     fetch(`${config.backendUrl}/api/submitSurvey`, {
       method: 'POST',

@@ -33,7 +33,12 @@ app.get('/api/surveyData', (req, res) => {
 });
 app.post('/api/submitSurvey', (req, res) => {
     const submittedData = req.body;
-    surveyData = submittedData;
+    // print the submitted data to the console
+    console.log(submittedData);
+    // if the submitted data is not undefined, save it to the database
+    if (submittedData !== undefined) {
+      surveyData = submittedData;
+    }
   
     res.sendStatus(200);
   });
