@@ -4,6 +4,7 @@ const app = express();
 const port = 3001;
 app.use(cors()); // Enable CORS for all routes
 // In-memory survey data
+app.use(express.json()); // Parse JSON in the request body
 surveyData = {
   title: 'Feedback Survey',
   pages: [
